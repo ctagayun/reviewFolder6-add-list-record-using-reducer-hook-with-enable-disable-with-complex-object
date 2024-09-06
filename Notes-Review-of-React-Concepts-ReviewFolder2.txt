@@ -1,0 +1,729 @@
+
+REVIEW FOLDER1
+  1. Javascript Classes:
+    - see https://app.pluralsight.com/ilx/video-courses/f4ccfaf2-29f8-416e-bb5d-34664ca1f136/c72fe2df-fa57-4b7e-b5a1-b19aee14c311/daf918cf-522f-4602-9b5d-0f132b46c5d4
+
+    - cheat sheet on conditional rendering: 
+        https://www.robinwieruch.de/conditional-rendering-react/
+        
+  2. REACT COMPONENTS - Javascript Component VS and React Component 
+
+      - React component extends the JavaScript class called "Component".
+        every react application is built in the foundation of React Components.
+
+      - React component specifically App compOnent is just a Javascript function. 
+          - defined in Pascal Case 
+          - commonly called App component
+          - App component has no parameter in its fucntion signature but you can pass props to it which 
+            becomes its paramters.
+
+          - App component has a "Return" statement. Which returns a code that resmebles HTML
+
+          - a function component runs everytime it is displayed in the browser
+
+          Example: 
+              function App() {
+                  const title = "Tochi"... variables are re-defined each time the function runs
+
+                  .... busines logic code or implementation details
+
+                  return (
+                      <div>
+                          <h1> Hello Chito </h1>
+                      </div>
+
+                  )
+              }
+
+  3. REACT JSX (a JSX is a combo of html and javascript code)
+      - recall that I mentioned the returned output of the App component not only resembles HTML, 
+      but it can also be mixed with JavaScript. In fact, this output is called JSX (JavaScript XML), 
+      which powerfully combines HTML and JavaScript.
+
+      - React Fast Refresh (changes are auto displayed in browser)
+      - Hot Module Replacement (changes are auto displayed in the server)
+
+      - JSX is a syntax extension to javascript.
+      - currently there is no need to create a JSX file with .jsx extension. Compilers and 
+        bundlers can be configures to recognize JSX code in a .js file.
+
+      - Curly braces enables JSX to be embedded in an HTML 
+          Anyway, JSX is one of my favorite things when being asked about React. Without any extra 
+          templating syntax (except for the curly braces), we are able to use JavaScript in HTML. 
+          Every JavaScript data structure, from primitive to complex, can be used within HTML with 
+          the help of JSX.
+
+      -  Question: Can JSX be directly rendered by browsers?
+          Answer: No, browsers can't understand JSX. It needs to be transpiled to regular JavaScript using
+          tools like Babel.
+
+      - Question: How do you render a variable in JSX?
+        Answer: Use curly braces {} to embed variables in JSX, like {myVariable}.
+
+  4. Read about Javascript variables
+      - https://www.robinwieruch.de/javascript-variable/
+
+      - review C:\_AMyReactDev\chitojavascriptdev/Notes-Creating-Javascript-Dev-Project-and- React-Dev
+
+      - Keywords Defining Variables:
+          var - old way of defining a variable. Don't use it anymore 
+                Variables declared by var are available 
+                throughout the function in which they're declared.
+
+          let - defines a variable. But you can change the value later.
+                Variables declared by let are only available inside the 
+                block where they're defined. 
+          const - defines a variable. Can't change it later.
+
+
+  4. LISTS IN REACT
+      - array's built-in map() method is is the most common data manipulation method. 
+        See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+
+      - in React map() transform a list of items into JSX by returning JSX for 
+        each item 
+
+  5. EXAMPLE OF PASSING PROPS AND USING SPREAD OPERATOR
+      Note: all function components by convention receive "props" even 
+            if the function doesn't have the param "props coded
+
+            Example:
+                function Button() {
+                return ( 
+                    <button onClick={props.onClickFunction}>
+                      + {props.increment}
+                  </button>
+                );
+              }
+      (1) See C:\_AMyReactDev\chitoreactdev\_guijt-house-react-projects\house-3-forsale-react-props
+          
+          houseArray passed as props called "list" <HouseList list={houseArray} /> 
+          
+          Referenced in HouseList = (props) => {
+            <tbody>
+              {props.list.map((item) => (
+                <tr key={item.id}>
+                  {Object.values(item).map((val) => (
+                      <td>{val}</td>
+                ))}
+              </tr>
+            )
+            )}
+            </tbody>
+        }
+
+      (2) Stories array passed to RenderTheList component as props called "list"
+            <RenderTheList list={stories} />
+
+            It is Referenced in RenderTheList component like this: 
+              const RenderTheList = (props) => {
+                <ul>
+                  {props.list.map( (item) => {
+                    return <li>{item.title}</li>;
+                  })}
+              </ul>
+
+              }
+
+        (3)  See C:\_AMyReactDev\chitoreactdev\_guijt-house-react-projects\house-3-forsale-react-props
+              //Instantiate the HouseRow component and pass each record
+              //to HouseRow component as props.
+              //house={record} means access of the "record"  and 
+              //assign it to variable "house"
+
+              <HouseRow key={record.id} house={record} />
+
+              It is Referenced in HouseRow component like this: 
+                const HouseRow = (props) => (
+                  <tr>
+                  <td>{props.house.id}</td>
+                  <td>{props.house.address}</td>
+                  <td>{props.house.country}</td>
+                  <td>{currencyFormatter.format(props.house.price)}</td>
+                </tr>
+              );
+
+        (4)  See C:\_AMyReactDev\chitoreactdev\_guijt-house-react-projects\house-5-forsale-react-lifting-state-add-search-component
+            
+              React state and searchHandler passed to Search component
+              <Search search={stateOfSearchComponent} onSearch={searchHandler}/> 
+
+              It is referenced like this in Search component:
+              
+              const Search = (props) => {  
+                <label htmlFor="search">Search:</label>
+                    <input id="search" 
+                      value={props.search}
+                      type="text"
+                      onChange={props.onSearch}/> 
+                    <p> 
+                      Searching for <strong>{props.search}</strong>
+                    </p>
+                }
+
+      5. SPREAD OPERATOR
+          See C:\_AMyReactDev\chitoreactdev\_guijt-house-react-projects\house-7-forsale-react-with-search-noadd-useEffect
+          const addHouse = () => {
+          //SetAddHouse is the state updater function 
+          //JavaScript's spread operator allows us to literally spread all key/value pairs 
+          //of an object to another object. This can also be done in React's JSX. 
+          //To do that use spread operator '...' to pass all the object's key/value pairs as 
+          //attribute/value pairs to a JSX element in this case 'item':
+          //    <Item key={item.objectID} {...item}>  ) 
+          setAddHouse([
+              ...houseState, //this is the state. It gets updated
+              {
+                id: 4,
+                address: "32 Valley Way, New York",
+                country: "USA",
+                price: 1000000,
+              },
+            ]); 
+          }
+            
+
+  6.  Two ways of declaring a React component:
+            //function Declaration
+              function App() {...}
+            //arror function expression
+              function App() => {...}
+
+  7.  EXAMPLE OF WRITING A COMPONENT USING "ARROW FUNCTION expression".
+
+          const RenderList(props) => {
+        
+            return (
+                <>
+                  <ul>
+                    {props.list.map( (item) => {
+                      return <li>{item.title}</li>;
+                    })}
+                  </ul>
+              </>
+            )
+          };
+
+  8.  EXAMPLE OF WRITING A COMPONENT USING FUNCTION Declaration
+            function RenderListUsingJSFunction(props) {
+            return (
+              <div>
+                  <h2>Printed by JS Function</h2>
+                  <ul>
+                    {props.list.map (function (item){ //using JS function
+                      return (
+                        <li key={item.objectID}>
+                        <span>
+                          <a href={item.url}>{item.title}</a>
+                        </span>
+                        <span>{item.author}</span>
+                        <span>{item.num_comments}</span>
+                        <span>{item.points}</span>
+                      </li>
+                      );
+                      })}
+                  </ul>
+              </div>
+
+              );
+
+  9. WHERE IS APP.JSX COMPONENT GET INSTANTIATED?
+          
+          Answer: In main.jsx (the entry point of a react application)
+                  There are 2 libraries imported at the beginning of main.jsx
+                    import React from 'react'; 
+                    import ReactDOM from 'react-dom/client';
+            Open main.jsx and index.html and read comments how React inserts
+          itself ito HTML
+
+          import React from 'react'; 
+          import ReactDOM from 'react-dom/client'; 
+          import App from './App.jsx';
+          import './index.css';
+          
+          ReactDOM.createRoot(document.getElementById('root')).render(
+            <React.StrictMode>
+              <App />
+            </React.StrictMode>
+          );
+
+  10. Handler Function of Events in JSK
+          See: C:\_AMyReactDev\robinreactcoursedev\hacker3-stories-on-callback-handlers-3
+          
+            - link to React's Event Handler 
+                https://www.robinwieruch.de/react-event-handler/
+
+            - Three kinds of event handlers:
+              see: Notes-hacker3
+              1. inline event handlers 
+
+              2. callback event handlers.
+                  - see hacker3-stories-on-callback-handlers-3
+
+              3  some event attributes of elements like button:
+                  onClick event, onChange event, onSubmit event     
+
+            - "synthetic event" - After opening your application in a web browser, open 
+            the browser's developer tools "Console"-tab to see the logging occur 
+            after you type into the input field. What you see is called a synthetic event
+            as a JavaScript object and the input field's internal value.
+
+            - to prevent native browser behavior of doing a browser refresh when a form 
+              is submitted, react creates the so-called "synthetic event" as wrapper to
+              browser native event to prevent refresh when a form is submitted. In react
+              page refresh should be prevented.
+
+            - Add listener listeners in JSX handler for user interaction. Example:
+                    # if handleChange is a function which does not return a function
+                      don't do this
+                    <input onChange={handleChange()} />
+                    
+                    # do this instead
+                    <input onChange={handleChange} />
+
+            - Question: How do you attach an event handler in JSX?
+                Answer: Use the appropriate attribute, like onClick={handleClick}.
+
+            - Question: How do you pass arguments to an event handler in JSX?
+                Answer: Use an arrow function to call the handler with arguments, 
+                like onClick={() => handleClick(arg)}
+
+            - Question: What is the purpose of the e.target property in an event handler?
+                Answer: It refers to the DOM element that triggered the event, allowing you 
+                to access its properties or manipulate it. 
+
+            - Question: What does event.preventDefault() do in an event handler?
+                Answer: It prevents the default behavior of the event, such as submitting a 
+                form or following a link.   
+
+            - Question: What is the purpose of the e.stopPropagation() method in an event handler?  
+                  Answer: It stops the event from propagating up or down the DOM tree, 
+                  preventing parent or child elements from handling the same event.
+                  
+            - Question: How do you access the event object in an event handler?
+                Answer: Include (event) as a parameter in the handler function, like 
+                function handleClick(event) {...}
+
+                Example: see hacker3-stories-on-callback-handlers-3
+                const handleChange = (event) =>{
+                  console.log('The event is=' + event); 
+                  console.log('The value of event is=' + event.target.value);
+                  //assign the value to the updater method of the React.useState  
+                  //which in turn will update value of searchTerm stateful value
+                  setSearchTerm(event.target.value); 
+
+                  //let's call the callback handler that was passed to the 
+                  //props.onSearch property. Whenever a user types into the input field 
+                  //now, the callback function that is passed down from the App component to the 
+                  //Search component via Props runs. This way, we can notify the App component 
+                  //when a user types into the input field in the Search component.
+                  props.onSearch(event);
+                }
+
+  11. How to make all component talk to each other: 
+            Answer: JSX CallBack Handlers. This is the only way child component communicate "up"
+            see: c:\_AMyReactDev\robinreactcoursedev\hacker3-stories-on-callback-handlers-3\src hacker3-stories-on-callback-handlers-3
+
+  12. More on Props, state, and ESLint 
+          - Template Literal Syntax: console.log(`Hello ${firstName} ${lastName}`);
+
+          - A point to consider regarding ESLint: you might encounter an error stating, "error 'list' 
+            is missing in props validation." in cases where JavaScript is the 
+            exclusive choice, (not prop-types) my suggestion is to disable this specific ESLint 
+            rule in your configuration file to resolve the issue.
+              rules: {
+                  ...
+                  'react/prop-types': 'off',
+                },
+
+          - see Notes-hacker3-txt 
+          - props are used to pass variable information to child components only and 
+            CANNOT be changed by receiving component
+
+          - React State: 
+                - Since Props cannot be changed (mutated), React introduces a data structure
+                  that can be mutated. It is called "React State"
+                - "React state" can be passed with props 
+
+                - when react state is passed to a component and that component calls
+                  the state setter which mutates the state:
+                      1. the component that mutates the state will re-render 
+                      2. the children of the component that cause the state change 
+                        will re-render as well
+
+                - SIMPLE state management hook = React.useState() hook 
+                    - see https://www.robinwieruch.de/react-usestate-hook/
+                    setSearchTerm is the setter function that modifies value of the variable "searchTerm"
+                    Example:const [searchTerm, setSearchTerm] = React.useState('');
+
+                    -useState can be used for javascript primitives (e.g integers, booleans, strings, and also arrays)
+                    But when you plan to manage complex state with "objects" and "complex" arrays,
+                    consider using "useReducer" hook
+
+                - COMPLEX state management hook - Reducer Hook 
+                    - https://www.robinwieruch.de/react-state-usereducer-usestate-usecontext/ 
+                    once you plan to manage more complex state with objects or more complex arrays, 
+                    you should check out React's useReducer hook.
+                    See https://www.robinwieruch.de/react-state-usereducer-usestate-usecontext/
+
+                    - scenarios where useReducer hook outshines useState. Complex:
+                        1. Complex state Containers
+                        2. Complex state Transitions
+                        3. Conditional State Updates
+              
+
+  13. Read more about JavaScript array destructuring
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#array_destructuring
+
+
+  14. JavaScript array's built-in filter method
+            Example Using javascript function expression
+              const searchedStories = stories.filter(function (story) {
+                return story.title.includes(searchTerm);
+            });
+            
+            Example returning items based on word length:
+              const words = [
+                  'spray',
+                  'limit',
+                  'elite',
+                  'exuberant',
+                  'destruction',
+                  'present'
+                ];
+  
+              const filteredWords = words.filter(function (word) {
+                return word.length > 6;
+              });
+
+
+            Example using arrow function:
+                //filter() is a method of an object. In this case stories. 
+                //It could be made more concise by using an 
+                //arrow function with an immediate return. The searchTerm could be case sensitive.
+                //To make it work,  fix this problem yourself by making the filter() method's 
+                //condition case insensitive. so convert everything to lower case.
+                const searchedStories = stories.filter((story) =>
+                  story.title.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+
+  15. Lifting State
+      Question: What is lifting state in React?
+        Answer: Lifting state refers to the practice of moving the state from a 
+                child component to its parent component.
+
+      Question: Why would you lift state in React?
+        Answer: To share and manage state at a higher level, making it accessible 
+                to multiple child components.
+
+      Question: How do you lift state in React?
+        Answer: Move the state and related functions to a common ancestor 
+                (usually a parent) component.
+
+      Question: Can multiple child components share the same lifted state?
+        Answer: Yes, lifting state allows multiple child components to share 
+        the same state.
+
+      Question: What's the advantage of lifting state over using local 
+                state in a component?
+        Answer: Lifting state promotes sharing state among components.
+
+      Question: What is the role of callbacks in lifting state?
+        Answer: Callback functions are used to pass data from child to parent 
+                components when lifting state.
+
+      Question: Can a child component modify the state of a parent component directly through a callback handler?
+        Answer: No, the child component can invoke the callback to notify the 
+                parent, and the parent can decide how to update its state.
+
+      Question: Is it necessary to lift all state to the top-level parent component?
+        Answer: No, only lift state to a level where it needs to be shared 
+                among multiple components.
+
+      Question: How does lifting state contribute to better component reusability?
+        Answer: Lifting state allows stateful logic to be concentrated in a common 
+        ancestor, making components more reusable.
+
+  16. Controlled Component 
+      - Example:
+        {/* // B - Pass in the initial state search={searchTerm}*/}
+        <Search onSearch={handleSearch} search={searchTerm}/>; 
+
+      - Question: What is a controlled component in React?
+          Answer: A controlled component is a component whose form elements 
+                  are controlled by React state e.g pass in an initial state.
+
+        Question: How do you create a controlled input in React?
+          Answer: Set the input value attribute to a state variable and provide 
+                  an onChange handler to update the state.
+
+      Question: What is the role of the value prop in a controlled input element?
+          Answer: The value prop sets the current value of the input, making it 
+          a controlled component.
+          Example: <input id="search" 
+                    type="text" 
+                    value={props.search} 
+                    onChange={props.onSearch} />
+
+        Question: How do you handle a controlled checkbox in React?
+          Answer: Use the checked attribute and provide an onChange 
+                  handler to update the corresponding state.
+
+        Question: How do you clear the value of a controlled component?
+          Answer: Set the state variable to an empty or null value to clear 
+                  the value of a controlled component.
+
+      Question: What are the potential downsides of using controlled components?
+          Answer: Controlled components can lead to verbose code, 
+          especially in forms with many input elements.
+
+REVIEW FOLDER2
+      This folder contains code examples for: Props Handling,  
+
+   1. Props Handling (Advanced)
+      - props are just Javascript object (e.g props.list, props.onsearch...)
+        which just passes info from one component to another, we can use 
+        javascript "object destructuring" to access its properties.
+
+   2. Props Destructuring via Object Destructuring
+      Example: 
+        const user = {
+          firstName: 'Robin',
+          lastName: 'Wieruch',
+        };
+        
+        // without object destructuring
+        const firstName = user.firstName;
+        const lastName = user.lastName;
+        
+        // with object destructuring. This  is the preferred way
+        const { firstName, lastName } = user;
+
+   3. Basic Destructuring props within the function body:
+        const Search = (props) => {
+           const {search, onSearch} = props;
+
+        return (
+            <div>
+            <label htmlFor="search">Search: </label>
+              <input
+                id="search"
+                type="text"
+                value={search}
+                onChange={onSearch}
+              />
+            </div>
+          );
+         };
+ 
+    4. Destucturing props object right away in the function signature
+    and omitting the function's block body of the component:
+
+      const Search = ({ search, onSearch }) => ( //note no return statememt
+          <div> 
+            <label htmlFor="search">Search: </label>
+            <input
+              id="search"
+              type="text"
+              value={search}
+              onChange={onSearch}
+            />
+          </div>
+        );
+
+   4. Nested Destructuring
+        - see comments in renderListDestructuringPropsInFunctionSignature
+          and  renderListUsingRestDestructuring
+        const user = {
+          firstName: 'Robin',
+          pet: { 
+            name: 'Trixi'
+          },
+        };
+
+        //without object destructuring
+        const firstName  = user.firstName;
+        conts name = user.pet.name;
+
+        //with nested destructuring
+        const {
+            firstName,
+            pet: {
+               name,
+            },
+        } = user; 
+      
+   5.  Spread and Rest Operator
+        - see comments in 
+             renderListUsingSpreadDotDotOperatorVariation1
+             renderListUsingSpreadDotDotOperatorVariation2
+
+REVIEW FOLDER3 - useEffect and Side Effects 
+   see C:\_AMyReactDev\robinreactcoursedev\hacker9-stories-react-side-effects-useEffects-9
+
+   1. React output is determined by:
+        - props and its state 
+        - and "side effect"
+
+   2. Making Search component remember what happened in the previous iteration.
+       - first store recent search to local storage (see app.jsx)
+
+   3. useEffect Hook
+       - facilitates the inclusion of side effects in the lifcycle of a react component.
+
+       React.useEffect(() => {
+            localStorage.setItem('search', searchTerm);
+         }, [searchTerm]);
+
+       React's useEffect Hook takes two arguments: The first argument is a 
+       function that runs our side-effect. In our case, the side-effect stores searchTerm 
+       into the browser's local storage. The second argument is a dependency array 
+       of variables. If one of these variables changes, the function for the 
+       side-effect is called. 
+       
+       When is useEffect fires:
+         1. any changes to the dependency array will fire the useEffect hook
+         2. if dependency array is left out, the function in useEffect will fire on 
+            every render (initial render and update renders) of the component 
+         3. if the dependency array is empty array e.g [], the function is onlt called 
+            once when the component renders the first time
+         4. It can be triggered when the component is first mounted, but also if one of 
+            its values (state, props, derived values from state/props) is updated.
+
+            Read more about useEffect: 
+               https://www.robinwieruch.de/react-useeffect-hook/
+            Read more about localstorage: 
+               https://www.robinwieruch.de/local-storage-react/   - do the exercises
+
+          Question: What is useEffect in React?
+             Answer: useEffect is a hook in React that allows function components to 
+                  perform side effects.
+          Question: Can you use multiple useEffect hooks in one component?
+             Answer: Yes, you can use multiple useEffect hooks in a single component.
+
+          Question: What does the second argument in useEffect represent?
+             Answer: The second argument is an array of dependencies. The effect runs 
+             when any of these dependencies change.
+
+          Question: How do you run useEffect only once (on mount)?
+             Answer: Pass an empty dependency array ([]) as the second argument.
+
+          Question: Can useEffect return a cleanup function?
+             Answer: Yes, the function returned from useEffect serves as a cleanup function.
+
+          Question: What is the purpose of the cleanup function in useEffect?
+             Answer: It handles the cleanup or teardown of resources when the component 
+             unmounts or when the dependencies change.
+             
+          Question: How do you perform cleanup in useEffect for each render?
+             Answer: Return a function inside the useEffect with the cleanup logic.
+
+          Question: Can you conditionally run useEffect based on a certain condition?
+             Answer: Yes, you can use conditional statements inside useEffect to control when 
+             it should run.
+
+          Question: What happens if you omit the second argument in useEffect?
+              Answer: It runs the effect after every render, leading to potential performance 
+              issues.
+
+          Question: How does useEffect contribute to avoiding race conditions in React?
+             Answer: It allows you to handle asynchronous operations and avoid race conditions 
+             by managing the order of execution. 
+       
+
+REVIEW FOLDER4 - Custom Hooks, localstorage, and MEMOIZING
+   see: C:\_AMyReactDev\robinreactcoursedev\hacker10-stories-on-react-custom-hooks
+       
+   1. React Custom Hooks (Advanced)   
+       -React custom Hooks, involving the creation of our own hooks tailored to specific requirements.
+   
+   - create useStorageState() custom hook
+     see  C:\_AMyReactDev\reviewFolder4-custom-hooks-and-localstorage
+
+
+REVIEW FOLDER5 - Inline handlers, useRef, memoizing, react.children
+                 Delete record
+   - Scenario 
+       Implement our next feature that enables the removal of items from the list.
+
+   - Tasks: 
+       1. The application renders a list of items and allows its users to filter 
+          the list via a search feature. 
+
+          
+       2. Next the application should render a button next to each list item which 
+         allows its users to remove the item from the list.
+
+       3. Incorporate bootstrap
+  
+   - Solution: 
+       - see C:\_AMyReactDev\reviewFolder5-inline-handlers
+
+       - Display a formatted List. 
+           See: C:\_AMyReactDev\chitoreactdev\_guijt-house-react-projects\house-1-forsale-react-house-list
+           1. Import the following in main.jsx
+              import "bootstrap/dist/css/bootstrap.min.css";
+              import "bootstrap/dist/js/bootstrap.bundle.min"
+
+           2. Update index.css
+
+       - The list of items needs to become a stateful value (here: stateful array) with 
+         useState in order to manipulate it (e.g. removing an item) later.
+
+       - Every list item should renders a button with a click handler. When clicking the button, 
+         the item gets removed from the list by MANIPULATING the state.
+         See: https://www.robinwieruch.de/react-button/
+
+       - Since the stateful list resides in the App component, one needs to use 
+         callback handlers to enable the Item component to communicate up to the 
+         App component for removing an item by its identifier.
+
+        - Setup Bootstrap
+          npm install bootstrap
+          Once the installation is complete, we can include it in our app’s 
+          entry file in main.jsx :
+          --  Bootstrap CSS
+          import "bootstrap/dist/css/bootstrap.min.css";
+          -- Bootstrap Bundle JS
+          import "bootstrap/dist/js/bootstrap.bundle.min";
+
+          Now since we created the project with Vite, we can rely 
+          on Vite's plugins to integrate ESLint properly. Run the 
+          following command
+            npm install vite-plugin-eslint --save-dev
+
+        - MEMOIZING
+            - see C:\_AMyReactDev\chitoreactdev\_guijt-house-react-projects/house-8-forsale-react-async-search-with-delete-add-moize
+            - see C:\_AMyReactDev\reviewFolder5-inline-handlers-custom-hook-delete-item-memoizing\src\item.jsx
+
+        - useRef 
+            - see https://react.dev/reference/react/useRef
+
+        Questions: 
+          Question: What is an inline function in React?
+            Answer: An inline function in React is often used as a function defined directly 
+            within the JSX.
+
+          Question: What is the advantage of using inline functions for event handlers in React?
+            Answer: Inline functions allow you to pass additional parameters easily.
+
+          Question: What is the alternative to using inline functions for event handlers in React?
+            Answer: Creating handler functions outside the render method and passing references 
+            to them can be an alternative.
+
+          Question: What is the syntax for creating an inline function in a React JSX event handler?
+            Answer: Use arrow function syntax directly within the event handler attribute, 
+            like onClick={() => myFunction()}.
+
+REVIEW FOLDER6 - Add, Update, Delete List Record and reducerHook
+  - cheat sheet on conditional rendering: 
+        https://www.robinwieruch.de/conditional-rendering-react/
+  - To add a record using useState
+      - make the list stateful by making use of useState Hook
+        see https://www.robinwieruch.de/react-add-item-to-list/
+        see: https://www.robinwieruch.de/react-usestate-hook/
+
+  - see the below link for conditional rendering and error handling 
+      - C:\_AMyReactDev\robinreactcoursedev\hacker-17-stories-react-conditional-rendering
+
+  - Add record using reducerHook
+      - https://www.robinwieruch.de/react-add-item-to-list/

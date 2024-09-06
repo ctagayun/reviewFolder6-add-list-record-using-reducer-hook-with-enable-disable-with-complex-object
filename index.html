@@ -1,0 +1,29 @@
+<!doctype html>
+<!-- notice the "html" element where id="root"
+     this is exactly where Reacts inserts itself into HTML
+     to bootstrap the entire app
+     
+   While one small HTML file (here: index.html) 
+  and one large JavaScript file (here: compiled and bundled 
+  src/main.jsx and src/App.jsx files) are transferred from web 
+  server to browser, the JavaScript file(s) are mostly responsible 
+  to render all the HTML in the browser. The HTML file is only 
+  there to request the JavaScript file and to render the HTML 
+  element where React inserts itself. From there, React calls 
+  all of its needed function components to render itself as 
+  component hierarchy.
+-->
+<html lang="en"> 
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div> <!-- id="root"
+                          this is exactly where Reacts inserts itself into HTML
+                          to bootstrap the entire app -->
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
