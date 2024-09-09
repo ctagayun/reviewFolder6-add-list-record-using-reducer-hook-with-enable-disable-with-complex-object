@@ -111,7 +111,8 @@
              }
              
           case 'ENABLE_DISABLE_BTN':
-             console.log(`ENABLE_DISABLE_BTN is executing, ${action.isDisable} ${action.isShowList}`)
+             console.log(`ENABLE_DISABLE_BTN is executing: isDisable= ${action.isDisable} isShowlist=${action.isShowList}`)
+        
              return {
                 ...state, isDisable: action.isDisable, isShowList: action.isShowlist //list property was not changed. Only the boolean flags
               };
@@ -179,7 +180,7 @@
           const [updatedList, dispatchListData] = React.useReducer(listReducer,{
                 list: initialList,
                 isShowlist: true,
-                isDisable: false,
+                isDisable: true,
         } );
         //Before we can add an item, we need to track the "input field's" state, 
         //because without the value from the input field, we don't have any text 
@@ -198,9 +199,9 @@
       
           if (!event.target.value.length)
           {
-             dispatchListData({type: 'ENABLE_DISABLE_BTN',  isDisable: true});  
+             dispatchListData({type: 'ENABLE_DISABLE_BTN',  isDisable: true,  isShowList: true});  
           }else{
-             dispatchListData({type: 'ENABLE_DISABLE_BTN',  isShowList: true, isDisable: false});
+             dispatchListData({type: 'ENABLE_DISABLE_BTN', isDisable: false,  isShowList: true});
           };
       
        };
