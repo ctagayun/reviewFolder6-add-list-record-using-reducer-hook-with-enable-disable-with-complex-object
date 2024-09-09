@@ -90,10 +90,11 @@
             //explicitly -- which didn't change
             //but in this case we are using JavaScript's spread operator to spread all 
             //key/value pairs from the state object into the new "state" object, 
-            //while overriding the list property (which the only changes) with the new list.
+            //while overriding the list property (the only property that was changed)
+            //with the new list.
             return {
               ...state,
-              list: state.list.concat({ title: action.title, id: action.id }),  //list: points to initialList OBJECT
+              list: state.list.concat({ title: action.title, id: action.objectID }),  //list: points to initialList OBJECT
             };
             
           case 'DELETE_ITEM':
@@ -109,10 +110,10 @@
                ) 
              }
              
-      
-           case 'ENABLE_DISABLE_BTN':
+          case 'ENABLE_DISABLE_BTN':
+             console.log(`ENABLE_DISABLE_BTN is executing, ${action.isDisable} ${action.isShowList}`)
              return {
-                ...state, isDisable, isShowList
+                ...state, isDisable: action.isDisable, isShowList: action.isShowlist //list property was not changed. Only the boolean flags
               };
 
           default:
@@ -197,9 +198,9 @@
       
           if (!event.target.value.length)
           {
-             dispatchListData({type: 'ENABLE_DISABLE_BTN', ...updatedList, isDisable: true});  
+             dispatchListData({type: 'ENABLE_DISABLE_BTN',  isDisable: true});  
           }else{
-             dispatchListData({type: 'ENABLE_DISABLE_BTN', ...updatedList, isShowList: true, isDisable: false});
+             dispatchListData({type: 'ENABLE_DISABLE_BTN',  isShowList: true, isDisable: false});
           };
       
        };
