@@ -197,7 +197,7 @@
           console.log(`Value of title input field: ${event.target.value} `)
           setTitle(event.target.value);
       
-          if (!event.target.value.length)
+          if (!event.target.value.length) //textbox is empty
           {
              dispatchListData({type: 'ENABLE_DISABLE_BTN',  isDisable: true,  isShowList: true});  
           }else{
