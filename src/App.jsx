@@ -94,7 +94,7 @@
             //with the new list.
             return {
               ...state,
-              list: state.list.concat({ title: action.title, id: action.objectID }),  //list: points to initialList OBJECT
+              list: state.list.concat({ title: action.title, objectID: action.objectID }),  //list: points to initialList OBJECT
             };
             
           case 'DELETE_ITEM':
